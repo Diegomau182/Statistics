@@ -6,8 +6,8 @@ const useDatabase = () => {
 
   const loadDatabase = async () => {
     try {
-     await database.dropDatabaseTableTypeAsync();
-     await database.dropDatabaseTableGraficAsync();
+     //await database.dropDatabaseTableTypeAsync();
+     //await database.dropDatabaseTableGraficAsync();
      //await database.setupDatabaseTableTypeAsync();
      //await database.setupDatabaseTableGraficAsync();
      //await database.setupTypeAsync();
