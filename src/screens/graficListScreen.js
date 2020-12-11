@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { StyleSheet,FlatList } from "react-native";
+import { StyleSheet,FlatList,Dimensions,Image } from "react-native";
 import {
   Card,
   Fab,
@@ -9,17 +9,14 @@ import {
   Text,
   View,
 } from "native-base";
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-} from "react-native-chart-kit";
+
+const {width,height} = Dimensions.get('window').width;
 // Utilizar el contexto de notas
 import { GraficContext } from "../context/GraficContext";
 
 
 const GraficListScreen = ({ navigation }) => {
+  
   const { grafic } = useContext(GraficContext);
   useEffect(() => {
     // Efecto secundario realizar la petición a la API
@@ -45,6 +42,11 @@ const GraficListScreen = ({ navigation }) => {
                   <Text>{item.name}</Text>
                   </CardItem>
                   <CardItem bordered>
+                    <View>
+                    <Text>Lables:{item.lables}</Text>
+                    <Image source={{Uri:`.png`}}></Image>
+                    <Text>Data:{item.data}</Text>
+                    </View>
                   </CardItem>
                   <CardItem footer bordered>
                     <Text>{item.Creacion}</Text>
@@ -93,6 +95,10 @@ const styles = StyleSheet.create({
     color:"#B2EBF2",
     textAlign:"center", 
     fontSize:46
+  },
+  ImagenLogo: {
+    flex: 1,
+    resizeMode: "stretch",
   },
 
 });
