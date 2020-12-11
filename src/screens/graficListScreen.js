@@ -14,9 +14,8 @@ const {width,height} = Dimensions.get('window').width;
 // Utilizar el contexto de notas
 import { GraficContext } from "../context/GraficContext";
 
-
 const GraficListScreen = ({ navigation }) => {
-  
+  const direccion = 'https://raw.githubusercontent.com/Diegomau182/Statistics/develop/assets/logos/';  
   const { grafic } = useContext(GraficContext);
   useEffect(() => {
     // Efecto secundario realizar la petición a la API
@@ -38,13 +37,15 @@ const GraficListScreen = ({ navigation }) => {
           return (
             <View> 
                 <Card>
-                  <CardItem header bordered>
-                  <Text>{item.name}</Text>
+                  <CardItem header bordered style={{alignContent:"center", justifyContent:"center"}}>
+                  <Text style={styles.textoCards}>{item.name}</Text>
                   </CardItem>
                   <CardItem bordered>
                     <View>
                     <Text>Lables:{item.lables}</Text>
-                    <Image source={{Uri:`.png`}}></Image>
+                    <View style={styles.marco}>
+                    <Image source={{uri:`${direccion}${item.nameType}.png`}} style={styles.ImagenLogo}></Image>
+                    </View>
                     <Text>Data:{item.data}</Text>
                     </View>
                   </CardItem>
@@ -85,6 +86,11 @@ const styles = StyleSheet.create({
     backgroundColor:"#FFFFFF",
     justifyContent:"center",
   },
+  textoCards:{
+    color: "#000",
+    alignContent:"center",
+      fontSize:25,
+  },
   pie:{
     flex:1,
     flexDirection:"row",
@@ -99,6 +105,16 @@ const styles = StyleSheet.create({
   ImagenLogo: {
     flex: 1,
     resizeMode: "stretch",
+  },
+  marco:{
+    flex: 1,
+    backgroundColor: "#e8cc57",
+    height: 155,
+    marginLeft: 0,
+    marginTop: -4,
+    marginRight: -15,
+    alignContent: "center",
+    justifyContent: "center",
   },
 
 });
