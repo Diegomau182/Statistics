@@ -10,7 +10,16 @@ const db = SQlite.openDatabase("Statistics.db");
 const getGrafic = (setGraficFunc) => {
     db.transaction((tx) => {
       tx.executeSql(
-        `sELECT * FROM type`,
+        `SELECT
+        Grafic.name,
+        Grafic.id,
+        Grafic.Creacion,
+        Grafic.lables,
+        Grafic.Data,
+        type.nameType
+      FROM
+        Grafic
+      INNER JOIN type ON type.id = Grafic.idTipo;`,
         [],
         (_, { rows: { _array } }) => {
           setGraficFunc(_array);
@@ -47,7 +56,7 @@ const insertGrafic = (IdTipo ,Name ,Lables ,Data ,successFunc) => {
     return new Promise((resolve, reject) => {
       db.transaction(
         (tx) => {
-          tx.executeSql(`type drop table`);
+          tx.executeSql(`drop table type`);
           console.log("se borraron la tabla Type");
         },
         (_, result) => {
@@ -65,7 +74,7 @@ const dropDatabaseTableGraficAsync = async () => {
     return new Promise((resolve, reject) => {
       db.transaction(
         (tx) => {
-          tx.executeSql(`Grafic drop table`);
+          tx.executeSql(`drop table Grafic`);
           console.log("se borro la tabla grafic");
         },
         (_, result) => {
