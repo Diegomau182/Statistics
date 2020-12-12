@@ -44,7 +44,7 @@ const GraficListScreen = ({ navigation }) => {
                     <View>
                     <Text>Lables:{item.lables}</Text>
                     <View style={styles.marco}>
-                    <Image source={{uri:`${direccion}${item.nameType}.png`}} style={styles.ImagenLogo}></Image>
+                    <Image source={ require("../../assets/logos/"+item.nameType+".png")} style={styles.ImagenLogo}></Image>
                     </View>
                     <Text>Data:{item.data}</Text>
                     </View>
