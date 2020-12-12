@@ -169,7 +169,7 @@ const setupDatabaseTableGraficAsync = async () => {
         (tx) => {
           tx.executeSql(`insert into Grafic(idTipo,name,lables,data) 
           values (?,?,?,?)
-          `, [1,
+          `, [2,
             "Prueba Grafica",
              'Abril,Mayo,Junio,Julio',
             "34,56,78,45"]);
