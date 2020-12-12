@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet,FlatList,Dimensions,Image } from "react-native";
 import {
   Card,
   Fab,
   Icon,
-  Body,
+  Button,
   CardItem,
   Text,
   View,
@@ -14,9 +14,11 @@ const {width,height} = Dimensions.get('window').width;
 // Utilizar el contexto de notas
 import { GraficContext } from "../context/GraficContext";
 
+
 const GraficListScreen = ({ navigation }) => {
-  const direccion = 'https://raw.githubusercontent.com/Diegomau182/Statistics/develop/assets/logos/';  
+  const direccion = 'https://raw.githubusercontent.com/Diegomau182/Statistics/develop/assets/graficas/';  
   const { grafic } = useContext(GraficContext);
+
   useEffect(() => {
     // Efecto secundario realizar la petición a la API
     grafic;
@@ -26,6 +28,7 @@ const GraficListScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.encabezado}>
         <Text style={styles.texto}>Statistic</Text>
+        
       </View>
       <View style={styles.cuerpo}>
         <FlatList
@@ -41,16 +44,24 @@ const GraficListScreen = ({ navigation }) => {
                   <Text style={styles.textoCards}>{item.name}</Text>
                   </CardItem>
                   <CardItem bordered>
-                    <View>
-                    <Text>Lables:{item.lables}</Text>
-                    <View style={styles.marco}>
-                    <Image source={ require("../../assets/logos/"+item.nameType+".png")} style={styles.ImagenLogo}></Image>
+                    <View style={{flexDirection:"row"}}>
+                    
+                    <View  style={styles.marco}>
+                    <Image source={{uri:`${direccion}${item.nameType}.png`}} style={styles.ImagenLogo}></Image>
                     </View>
-                    <Text>Data:{item.data}</Text>
+                    <View style={styles.marcoDos}>
+                      <Text>Lables</Text>
+                      <Text>{item.lablesOne},{item.lableTwo},{item.lableThree},{item.lableFour},{item.lableFive}</Text>
+                    <Text></Text>
+                    <Text>Data</Text>
+                      <Text>{item.dataOne},{item.dataTwo},{item.dataThree},{item.dataFour},{item.dataFive}</Text>
+                    </View>
                     </View>
                   </CardItem>
-                  <CardItem footer bordered>
+                  <CardItem footer bordered style={{flexDirection:"row-reverse"}}>
+                    <View >
                     <Text>{item.Creacion}</Text>
+                    </View>
                   </CardItem>
                 </Card>
             </View>
@@ -61,9 +72,10 @@ const GraficListScreen = ({ navigation }) => {
       <View style={styles.pie}>
           <Fab
             active={true}
-            position="bottomRight"
+            position=""
             style={{ backgroundColor: "#00BCD4" }}
             direction="down"
+            onPress={() => {navigation.navigate("Create Grafic")}}
           >
           <Icon name="plus" type="FontAwesome" />
           </Fab>
@@ -108,9 +120,21 @@ const styles = StyleSheet.create({
   },
   marco:{
     flex: 1,
-    backgroundColor: "#e8cc57",
+    borderRadius: 10,
+    backgroundColor: "#B2EBF2",
     height: 155,
-    marginLeft: 0,
+    marginLeft: -10,
+    marginTop: -4,
+    marginRight: -15,
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  marcoDos:{
+    flex: 1,
+    borderRadius: 10,
+    backgroundColor: "#B2EBF2",
+    height: 155,
+    marginLeft: 1,
     marginTop: -4,
     marginRight: -15,
     alignContent: "center",
