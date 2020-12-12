@@ -14,8 +14,16 @@ const getGrafic = (setGraficFunc) => {
         Grafic.name,
         Grafic.id,
         Grafic.Creacion,
-        Grafic.lables,
-        Grafic.Data,
+        Grafic.lablesOne,
+        Grafic.lableTwo,
+        Grafic.lableThree,
+        Grafic.LableFour,
+        Grafic.LableFive,
+        Grafic.DataOne,
+        Grafic.DataTwo,
+        Grafic.DataThree,
+        Grafic.DataFour,
+        Grafic.DataFive,
         type.nameType
       FROM
         Grafic
@@ -34,12 +42,41 @@ const getGrafic = (setGraficFunc) => {
       );
     });
   };
+  const getType = (setGraficFunc) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        `SELECT * FROM type`,
+        [],
+        (_, { rows: { _array } }) => {
+          setGraficFunc(_array);
+        },
+        (_t, error) => {
+          console.log("Error al momento de obtener las Graficas");
+          console.log(error);
+        },
+        (_t, _success) => {
+          console.log("Graficas obtenidas");
+        }
+      );
+    });
+  };
   // Insertar grafica
-const insertGrafic = (IdTipo ,Name ,Lables ,Data ,successFunc) => {
+const insertGrafic = (IdTipo ,Name ,LableOne,LableTwo,LableThree,LableFour,LableFive ,DataOne,DataTwo,DataThree,DataFour,DataFive ,successFunc) => {
     db.transaction(
       (tx) => {
-        tx.executeSql("insert into Grafic(idTipo,name,lables,data) values (?,?,?,?)", 
-        [IdTipo,Name,Lables,Data]);
+        tx.executeSql(`insert into Grafic(idTipo,name,
+                                          lablesOne,
+                                          lableTwo,
+                                          lableThree ,
+                                          lableFour ,
+                                          lableFive ,
+                                          dataOne ,
+                                          dataTwo ,
+                                          dataThree ,
+                                          dataFour ,
+                                          dataFive ) 
+                                          values (?,?,?,?,?,?,?,?,?,?,?,?)`, 
+        [IdTipo,Name,LableOne,LableTwo,LableThree,LableFour,LableFive,DataOne,DataTwo,DataThree,DataFour,DataFive]);
       },
       (_t, error) => {
         console.log("Error al insertar la Grafica");
@@ -50,6 +87,22 @@ const insertGrafic = (IdTipo ,Name ,Lables ,Data ,successFunc) => {
       }
     );
   };
+  const deleteGrafic = (id,successFunc) => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql("DELETE FROM tabla1 WHERE valor = ?", 
+        [id]);
+      },
+      (_t, error) => {
+        console.log("Error al Eliminar la Grafica");
+        console.log(error);
+      },
+      (_t, _success) => {
+        successFunc;
+      }
+    );
+  };
+
 
   //Borrar todas las tablas
   const dropDatabaseTableTypeAsync = async () => {
@@ -119,8 +172,16 @@ const setupDatabaseTableGraficAsync = async () => {
             ` create table if not exists Grafic (id integer primary key AUTOINCREMENT,
                                                 idTipo integer not null,
                                                 name text ,
-                                                lables text not null,
-                                                data text not null,
+                                                lablesOne text null,
+                                                lableTwo  text null,
+                                                lableThree text null,
+                                                lableFour text null,
+                                                lableFive text null,
+                                                dataOne text null,
+                                                dataTwo text null,
+                                                dataThree text null,
+                                                dataFour text null,
+                                                dataFive text null,
                                                 Creacion DATE DEFAULT (dateTime('now','localtime')),
                                                 foreign Key (idTipo) references type(id)
                                                 );` 
@@ -167,12 +228,21 @@ const setupDatabaseTableGraficAsync = async () => {
     return new Promise((resolve, reject) => {
       db.transaction(
         (tx) => {
-          tx.executeSql(`insert into Grafic(idTipo,name,lables,data) 
-          values (?,?,?,?)
-          `, [2,
-            "Prueba Grafica",
-             'Abril,Mayo,Junio,Julio',
-            "34,56,78,45"]);
+          tx.executeSql(`insert into Grafic(idTipo,name,lablesOne,
+            lableTwo,
+            lableThree ,
+            lableFour ,
+            lableFive ,
+            dataOne ,
+            dataTwo ,
+            dataThree ,
+            dataFour ,
+            dataFive) 
+            values (?,?,?,?,?,?,?,?,?,?,?,?)`
+          , [3,
+            "Grafica Prueba",
+             'Abril','Mayo','Junio','Julio',"",
+            "34","56","78","45",""]);
             console.log("Valores por defecto grafic");
         },
         (_t, error) => {
@@ -188,11 +258,13 @@ const setupDatabaseTableGraficAsync = async () => {
   };
 export const database = {
     getGrafic,
+    getType,
     insertGrafic,
     dropDatabaseTableTypeAsync,
     dropDatabaseTableGraficAsync,
     setupDatabaseTableTypeAsync,
     setupDatabaseTableGraficAsync,
     setupTypeAsync,
-    setupGraficAsync
+    setupGraficAsync,
+    deleteGrafic
   };
