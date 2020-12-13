@@ -51,7 +51,7 @@ const GraficListScreen = ({ navigation }) => {
                     <Image source={{uri:`${direccion}${item.nameType}.png`}} style={styles.ImagenLogo}></Image>
                     </View>
                     <View style={styles.marcoDos}>
-                      <Text style={{fontSize:20,fontStyle:"italic", color:"#000"}}>Lables:</Text>
+                      <Text style={{alignContent:"center",fontSize:20,fontStyle:"italic", color:"#000"}}>Lables:</Text>
                       <Text>{item.lablesOne}, {item.lableTwo}, {item.lableThree}, {item.lableFour}, {item.lableFive}</Text>
                     <Text style={{fontSize:20,fontStyle:"italic", color:"#000"}}>Data:</Text>
                       <Text>{item.dataOne}, {item.dataTwo}, {item.dataThree}, {item.dataFour}, {item.dataFive}</Text>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   marco:{
     flex: 1,
     borderRadius: 20,
-    backgroundColor: "#B2EBF2",
+    backgroundColor: "#ffffff",
     height: 155,
     marginLeft: 5,
     marginTop: -4,
@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginTop: -4,
     marginRight: 10,
+    alignItems:"center",
     alignContent: "center",
     justifyContent: "center",
   },
