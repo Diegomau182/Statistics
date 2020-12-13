@@ -27,7 +27,8 @@ const getGrafic = (setGraficFunc) => {
         type.nameType
       FROM
         Grafic
-      INNER JOIN type ON type.id = Grafic.idTipo;`,
+      INNER JOIN type ON type.id = Grafic.idTipo
+      Order by Grafic.id desc;`,
         [],
         (_, { rows: { _array } }) => {
           setGraficFunc(_array);
@@ -171,7 +172,7 @@ const setupDatabaseTableGraficAsync = async () => {
           tx.executeSql(
             ` create table if not exists Grafic (id integer primary key AUTOINCREMENT,
                                                 idTipo integer not null,
-                                                name text ,
+                                                name text not null,
                                                 lablesOne text null,
                                                 lableTwo  text null,
                                                 lableThree text null,

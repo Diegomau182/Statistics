@@ -13,6 +13,7 @@ import {
 const {width,height} = Dimensions.get('window').width;
 // Utilizar el contexto de notas
 import { GraficContext } from "../context/GraficContext";
+import { color } from "react-native-reanimated";
 
 
 const GraficListScreen = ({ navigation }) => {
@@ -46,15 +47,14 @@ const GraficListScreen = ({ navigation }) => {
                   <CardItem bordered>
                     <View style={{flexDirection:"row"}}>
                     
-                    <View  style={styles.marco}>
+                    <View style={styles.marco}>
                     <Image source={{uri:`${direccion}${item.nameType}.png`}} style={styles.ImagenLogo}></Image>
                     </View>
                     <View style={styles.marcoDos}>
-                      <Text>Lables</Text>
-                      <Text>{item.lablesOne},{item.lableTwo},{item.lableThree},{item.lableFour},{item.lableFive}</Text>
-                    <Text></Text>
-                    <Text>Data</Text>
-                      <Text>{item.dataOne},{item.dataTwo},{item.dataThree},{item.dataFour},{item.dataFive}</Text>
+                      <Text style={{fontSize:20,fontStyle:"italic", color:"#000"}}>Lables:</Text>
+                      <Text>{item.lablesOne}, {item.lableTwo}, {item.lableThree}, {item.lableFour}, {item.lableFive}</Text>
+                    <Text style={{fontSize:20,fontStyle:"italic", color:"#000"}}>Data:</Text>
+                      <Text>{item.dataOne}, {item.dataTwo}, {item.dataThree}, {item.dataFour}, {item.dataFive}</Text>
                     </View>
                     </View>
                   </CardItem>
@@ -120,12 +120,12 @@ const styles = StyleSheet.create({
   },
   marco:{
     flex: 1,
-    borderRadius: 10,
+    borderRadius: 20,
     backgroundColor: "#B2EBF2",
     height: 155,
-    marginLeft: -10,
+    marginLeft: 5,
     marginTop: -4,
-    marginRight: -15,
+    marginRight: 5,
     alignContent: "center",
     justifyContent: "center",
   },
@@ -134,9 +134,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#B2EBF2",
     height: 155,
-    marginLeft: 1,
+    marginLeft: 10,
     marginTop: -4,
-    marginRight: -15,
+    marginRight: 10,
     alignContent: "center",
     justifyContent: "center",
   },

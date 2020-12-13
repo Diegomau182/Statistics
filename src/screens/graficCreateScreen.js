@@ -49,6 +49,11 @@ const graficCreateScreen = ({ navigation }) => {
 
     loadFontsAsync();
   }, []);
+  // Ejecutar el efecto cuando el valor de la nota cambie
+  useEffect(() => {
+    if (Name) setEnableSave(false);
+    else setEnableSave(true);
+  }, [Name]);
 
     const handlerNewGrafic = () => {
         if(idTipo,Name,LablesOne,LableTwo,LablesThree,LableFour,LableFive,DataOne,DataTwo,
@@ -102,7 +107,9 @@ const graficCreateScreen = ({ navigation }) => {
             <View style={styles.marcoDos}>
             <ScrollView>
                 <Text style={styles.textoCards}>Lable One</Text>
-                <Input style={styles.tamanoDos} value={LablesOne} onChangeText={setLablesOne}placeholder="Write the lable one"/>
+                <Item style={errorgrafic ? styles.inputError : styles.itemStyle} >
+                <Input style={styles.tamanoDos } value={LablesOne} onChangeText={setLablesOne}placeholder="Write the lable one"/>
+                </Item>
                 <Text style={styles.textoCards}>Data One</Text>
                 <Input style={styles.tamanoDos} value={DataOne} onChangeText={setDataOne}placeholder="Write the data one"/>
                 <Text style={styles.textoCards}>Lable Two</Text>
@@ -173,6 +180,9 @@ const styles = StyleSheet.create({
       alignContent:"center",
       justifyContent:"center",
       backgroundColor:"#0097A7"
+    },
+    itemStyle:{
+    marginTop:20,
     },
     texto:{
       color:"#B2EBF2",
