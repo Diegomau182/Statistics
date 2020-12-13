@@ -1,16 +1,15 @@
-import React, { useState,useContext,useEffect } from "react";
-import {StyleSheet,FlatList} from "react-native";
+import React, { Component,useState,useContext,useEffect } from "react";
+import {StyleSheet,FlatList,Picker,View} from "react-native";
 import {Button,
     Container,
     Content,
-    H1,
     Text,
     Card,
+    Item,
     ListItem,
     Input,
     Spinner,
-    View,
-    Body,} from "native-base";
+    } from "native-base";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { GraficContext } from "../context/GraficContext";
 import {TypeContext} from "../context/typeContext";
@@ -52,9 +51,10 @@ const graficCreateScreen = ({ navigation }) => {
   }, []);
 
     const handlerNewGrafic = () => {
-        if(idTipo,Name,Lables,Data){
-        addNewGrafic(idTipo,Name,LablesOne,DataOne,LableTwo,DataTwo,LablesThree,
-                    DataThree,LableFour,DataFour,LableFive,DataFive,refreshGastos);
+        if(idTipo,Name,LablesOne,LableTwo,LablesThree,LableFour,LableFive,DataOne,DataTwo,
+          DataThree,DataFour,DataFive){
+        addNewGrafic(idTipo,Name,LablesOne,LableTwo,LablesThree,LableFour,LableFive,DataOne,DataTwo,
+          DataThree,DataFour,DataFive,refreshGrafic );
           navigation.goBack();
         }
         else {
@@ -77,31 +77,24 @@ const graficCreateScreen = ({ navigation }) => {
             </Text>
             <Input style={styles.tamano}
             value={Name}
+            defaultValue={"Vacio"}
             onChangeText={setName}
             placeholder="Write the name"/>
-           
             </View>
             <View style={styles.marco}>
             <Text style={styles.textoCards}>
              Add Type the Grafic
             </Text>
-            <FlatList
-        data={type}
-        keyExtractor={(item) => item.id.toString()}
-        ListEmptyComponent={
-        <Text>Grafic not found</Text>}
-        renderItem={({ item }) => {
-          return (
-            <TouchableOpacity >
-            <View> 
-                <Card>
-                    <Text>{item.nameType}</Text>
-                </Card>
-            </View>
-            </TouchableOpacity>
-          )
-        }}
-        />
+            <Picker
+              selectedValue={idTipo}
+              style={{marginTop:40, height: 50, width: 180 }}
+              onValueChange={(itemValue, itemIndex) => setIdTipo(itemValue)}
+              >
+              <Picker.Item label={type[0].nameType} value= "1" />
+              <Picker.Item label={type[1].nameType} value="2" />
+              <Picker.Item label={type[2].nameType} value="3"/>
+              <Picker.Item  label={type[3].nameType} value="4"/>
+              </Picker>
             </View>
             </View>
             
@@ -128,13 +121,14 @@ const graficCreateScreen = ({ navigation }) => {
                 <Input style={styles.tamanoDos} value={LableFive} onChangeText={setLableFive}placeholder="Write the lable five"/>
                 <Text style={styles.textoCards}>Data Five</Text>
                 <Input style={styles.tamanoDos} value={DataFive} onChangeText={setDataFive}placeholder="Write the data five"/>
+                
                 </ScrollView>
             </View>
             </View>
             
             
             <View style={styles.pie}>
-            <Button style={styles.button}><Text>Add Grafic</Text></Button>
+            <Button style={styles.button} rounded onPress={handlerNewGrafic}><Text>Add Grafic</Text></Button>
             </View>
 
         </Container>
