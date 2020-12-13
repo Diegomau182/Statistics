@@ -17,7 +17,7 @@ import { color } from "react-native-reanimated";
 
 
 const GraficListScreen = ({ navigation }) => {
-  const direccion = 'https://raw.githubusercontent.com/Diegomau182/Statistics/develop/assets/graficas/';  
+  const direccion = 'https://raw.githubusercontent.com/Diegomau182/Statistics/develop/assets/Logosgraficas/';  
   const { grafic } = useContext(GraficContext);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const GraficListScreen = ({ navigation }) => {
                     </View>
                     <View style={styles.marcoDos}>
                       <Text style={{alignContent:"center",fontSize:20,fontStyle:"italic", color:"#000"}}>Lables:</Text>
-                      <Text>{item.lablesOne}, {item.lableTwo}, {item.lableThree}, {item.lableFour}, {item.lableFive}</Text>
+                      <Text style={{alignItems:"center"}}>{item.lablesOne}, {item.lableTwo}, {item.lableThree}, {item.lableFour}, {item.lableFive}</Text>
                     <Text style={{fontSize:20,fontStyle:"italic", color:"#000"}}>Data:</Text>
                       <Text>{item.dataOne}, {item.dataTwo}, {item.dataThree}, {item.dataFour}, {item.dataFive}</Text>
                     </View>

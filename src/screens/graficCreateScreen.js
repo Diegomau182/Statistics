@@ -55,10 +55,10 @@ const graficCreateScreen = ({ navigation }) => {
     else setEnableSave(true);
   }, [Name]);
 
-    const handlerNewGrafic = () => {
+    const handlerNewGrafic = async () => {
         if(idTipo,Name,LablesOne,LableTwo,LablesThree,LableFour,LableFive,DataOne,DataTwo,
           DataThree,DataFour,DataFive){
-        addNewGrafic(idTipo,Name,LablesOne,LableTwo,LablesThree,LableFour,LableFive,DataOne,DataTwo,
+        await addNewGrafic(idTipo,Name,LablesOne,LableTwo,LablesThree,LableFour,LableFive,DataOne,DataTwo,
           DataThree,DataFour,DataFive,refreshGrafic );
           navigation.goBack();
         }
