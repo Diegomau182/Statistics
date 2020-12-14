@@ -24,9 +24,9 @@ export const GraficContextProvider = (props) => {
   };
  
 
-  const addNewGrafic = (IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
+  const addNewGrafic = async(IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
     DataThree,LablesFour,DataFour,LablesFive,DataFive) => {
-    return database.insertGrafic(IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
+     return database.insertGrafic(IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
       DataThree,LablesFour,DataFour,LablesFive,DataFive, refreshGrafic);
   };
   const deleteGrafic = (id) => {

@@ -62,7 +62,7 @@ const getGrafic = (setGraficFunc) => {
     });
   };
   // Insertar grafica
-const insertGrafic = (IdTipo ,Name ,LableOne,LableTwo,LableThree,LableFour,LableFive ,DataOne,DataTwo,DataThree,DataFour,DataFive ,successFunc) => {
+const insertGrafic = async () => (IdTipo ,Name ,LableOne,LableTwo,LableThree,LableFour,LableFive ,DataOne,DataTwo,DataThree,DataFour,DataFive ,successFunc) => {
     db.transaction(
       (tx) => {
         tx.executeSql(`insert into Grafic(idTipo,name,
