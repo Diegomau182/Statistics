@@ -88,6 +88,26 @@ const insertGrafic = (IdTipo ,Name ,LableOne,LableTwo,LableThree,LableFour,Lable
       }
     );
   };
+  // buscar Grafica por el id
+const getGraficById = (id, setNoteFunc) => {
+  db.transaction((tx) => {
+    tx.executeSql(
+      "select * from Grafic where id = ?",
+      [id],
+      (_, { rows: { _array } }) => {
+        setNoteFunc(_array);
+      },
+      (_t, error) => {
+        console.log("Error al momento de obtener la grafica.");
+        console.log(error);
+      },
+      (_t, _success) => {
+        console.log("Grafica obtenidas");
+      }
+    );
+  });
+};
+
   const deleteGrafic = (id,successFunc) => {
     db.transaction(
       (tx) => {
@@ -267,5 +287,6 @@ export const database = {
     setupDatabaseTableGraficAsync,
     setupTypeAsync,
     setupGraficAsync,
-    deleteGrafic
+    deleteGrafic,
+    getGraficById
   };

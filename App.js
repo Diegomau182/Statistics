@@ -9,6 +9,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import graficListScreen from "./src/screens/graficListScreen";
 import graficCreateScreen from "./src/screens/graficCreateScreen";
 import useDatabase from "./src/Hooks/useDataBase";
+import graficModifyScreen from "./src/screens/graficModifyScreen";
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="grafic List">
             <Stack.Screen name="grafic List" component={graficListScreen} options={{headerShown:false}}/>
             <Stack.Screen name="Create Grafic" component={graficCreateScreen}/>
+            <Stack.Screen name="Modify Grafic" component={graficModifyScreen}/>
           </Stack.Navigator>
       </NavigationContainer>
       </TypeContextProvider>
