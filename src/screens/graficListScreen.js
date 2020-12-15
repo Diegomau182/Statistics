@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet,FlatList,Dimensions,Image } from "react-native";
+import { StyleSheet,FlatList,Dimensions,Image, TouchableOpacityBase } from "react-native";
 import {
   Card,
   Fab,
@@ -9,6 +9,7 @@ import {
   Text,
   View,
 } from "native-base";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const {width,height} = Dimensions.get('window').width;
 // Utilizar el contexto de notas
@@ -40,6 +41,9 @@ const GraficListScreen = ({ navigation }) => {
         renderItem={({ item }) => {
           return (
             <View> 
+              <TouchableOpacity onPress={() =>
+                      navigation.navigate("Modify Grafic", { id: item.id })
+                    }>
                 <Card>
                   <CardItem header bordered style={{alignContent:"center", justifyContent:"center"}}>
                   <Text style={styles.textoCards}>{item.name}</Text>
@@ -64,6 +68,7 @@ const GraficListScreen = ({ navigation }) => {
                     </View>
                   </CardItem>
                 </Card>
+              </TouchableOpacity>
             </View>
           )
         }}

@@ -12,6 +12,9 @@ export const GraficContextProvider = (props) => {
 
   // Almacenar los valores en el estado
   const [grafic, setGrafic] = useState(initialGrafic);
+
+  // Guarda los valores en el estado
+  const [grafics, setGrafics] = useState("");
   
 
   // Cargar u obtener las graficas
@@ -29,15 +32,16 @@ export const GraficContextProvider = (props) => {
      return database.insertGrafic(IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
       DataThree,LablesFour,DataFour,LablesFive,DataFive, refreshGrafic);
   };
-  const deleteGrafic = (id) => {
-    return database.deleteGrafic(id, refreshGrafic);
+  const getGraficById = (id) => {
+    return database.getGraficById(id, setGrafics);
   };
 
   // Crear el objeto de contexto
   const graficContext = {
     grafic,
     addNewGrafic,
-    deleteGrafic
+    getGraficById,
+    grafics
   };
 
   // Pasar los valores al proveedor y retornarlo
