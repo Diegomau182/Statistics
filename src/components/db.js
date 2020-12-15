@@ -88,6 +88,36 @@ const insertGrafic = async () => (IdTipo ,Name ,LableOne,LableTwo,LableThree,Lab
       }
     );
   };
+
+  // modificar grafica
+  const updateTableGrafic = (IdTipo ,Name ,LableOne,LableTwo,LableThree,LableFour,LableFive ,DataOne,DataTwo,DataThree,DataFour,DataFive, Id ,successFunc) => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql(`update Grafic  set
+                                          idTipo = ?,
+                                          name  = ?,
+                                          lablesOne  = ?,
+                                          lableTwo  = ?,
+                                          lableThree  = ?,
+                                          lableFour  = ?,
+                                          lableFive  = ?,
+                                          dataOne  = ?,
+                                          dataTwo  = ?,
+                                          dataThree = ?,
+                                          dataFour = ?,
+                                          dataFive = ? 
+                                          where id = ? `, 
+        [IdTipo,Name,LableOne,LableTwo,LableThree,LableFour,LableFive,DataOne,DataTwo,DataThree,DataFour,DataFive,Id]);
+      console.log("Grafica Modificada :v")},
+      (_t, error) => {
+        console.log("Error al modificar la Grafica");
+        console.log(error);
+      },
+      (_t, _success) => {
+        successFunc;
+      }
+    );
+  };
   // buscar Grafica por el id
 const getGraficById = (id, setNoteFunc) => {
   db.transaction((tx) => {
@@ -288,5 +318,6 @@ export const database = {
     setupTypeAsync,
     setupGraficAsync,
     deleteGrafic,
-    getGraficById
+    getGraficById,
+    updateTableGrafic
   };

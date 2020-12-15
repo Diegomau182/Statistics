@@ -14,7 +14,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const {width,height} = Dimensions.get('window').width;
 // Utilizar el contexto de notas
 import { GraficContext } from "../context/GraficContext";
-import { color } from "react-native-reanimated";
 
 
 const GraficListScreen = ({ navigation }) => {
