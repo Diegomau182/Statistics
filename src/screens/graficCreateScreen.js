@@ -65,7 +65,6 @@ const graficCreateScreen = ({ navigation }) => {
             setErrorGrafic(true);
           } 
         };
-    console.log(type);
     if (!fontsLoaded)
     return (
       <Content contentContainerStyle={styles.content}>

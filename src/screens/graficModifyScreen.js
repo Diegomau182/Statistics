@@ -56,7 +56,7 @@ const graficModifyScreen = ({ route,navigation }) => {
     const getGrafic =  async() => {await getGraficById(id)}; getGrafic();
      if (grafics.length) {
          setName(grafics[0].name);
-         console.log(Name);
+        
      };
   }, [id,grafics] );
 

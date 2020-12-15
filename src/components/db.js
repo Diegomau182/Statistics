@@ -196,7 +196,7 @@ const dropDatabaseTableGraficAsync = async () => {
         (tx) => {
           tx.executeSql(
             `create table if not exists type (id integer primary key AUTOINCREMENT,
-              nameType text not null
+              nameType text UNIQUE
               ); ` 
           );
           console.log("se creo la tabla type")
