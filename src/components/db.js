@@ -62,7 +62,7 @@ const getGrafic = (setGraficFunc) => {
     });
   };
   // Insertar grafica
-const insertGrafic = async () => (IdTipo ,Name ,LableOne,LableTwo,LableThree,LableFour,LableFive ,DataOne,DataTwo,DataThree,DataFour,DataFive ,successFunc) => {
+const insertGrafic = (IdTipo ,Name ,LableOne,LableTwo,LableThree,LableFour,LableFive ,DataOne,DataTwo,DataThree,DataFour,DataFive ,successFunc) => {
     db.transaction(
       (tx) => {
         tx.executeSql(`insert into Grafic(idTipo,name,
@@ -90,12 +90,10 @@ const insertGrafic = async () => (IdTipo ,Name ,LableOne,LableTwo,LableThree,Lab
   };
 
   // modificar grafica
-  const updateTableGrafic = (IdTipo ,Name ,LableOne,LableTwo,LableThree,LableFour,LableFive ,DataOne,DataTwo,DataThree,DataFour,DataFive, Id ,successFunc) => {
+  const updateTableGrafic = (LableOne,LableTwo,LableThree,LableFour,LableFive ,DataOne,DataTwo,DataThree,DataFour,DataFive, Id ,successFunc) => {
     db.transaction(
       (tx) => {
         tx.executeSql(`update Grafic  set
-                                          idTipo = ?,
-                                          name  = ?,
                                           lablesOne  = ?,
                                           lableTwo  = ?,
                                           lableThree  = ?,
@@ -106,8 +104,8 @@ const insertGrafic = async () => (IdTipo ,Name ,LableOne,LableTwo,LableThree,Lab
                                           dataThree = ?,
                                           dataFour = ?,
                                           dataFive = ? 
-                                          where id = ? `, 
-        [IdTipo,Name,LableOne,LableTwo,LableThree,LableFour,LableFive,DataOne,DataTwo,DataThree,DataFour,DataFive,Id]);
+                                          where id = ?`, 
+        [LableOne,LableTwo,LableThree,LableFour,LableFive,DataOne,DataTwo,DataThree,DataFour,DataFive,Id]);
       console.log("Grafica Modificada :v")},
       (_t, error) => {
         console.log("Error al modificar la Grafica");
@@ -119,13 +117,13 @@ const insertGrafic = async () => (IdTipo ,Name ,LableOne,LableTwo,LableThree,Lab
     );
   };
   // buscar Grafica por el id
-const getGraficById = (id, setNoteFunc) => {
+const getGraficById = async(id, setGraficFunc) => {
   db.transaction((tx) => {
     tx.executeSql(
       "select * from Grafic where id = ?",
       [id],
       (_, { rows: { _array } }) => {
-        setNoteFunc(_array);
+        setGraficFunc(_array);
       },
       (_t, error) => {
         console.log("Error al momento de obtener la grafica.");
@@ -141,7 +139,7 @@ const getGraficById = (id, setNoteFunc) => {
   const deleteGrafic = (id,successFunc) => {
     db.transaction(
       (tx) => {
-        tx.executeSql("DELETE FROM tabla1 WHERE valor = ?", 
+        tx.executeSql("DELETE FROM Grafic WHERE id = ?", 
         [id]);
       },
       (_t, error) => {
