@@ -25,6 +25,12 @@ export const GraficContextProvider = (props) => {
   const refreshGrafic = () => {
     return database.getGrafic(setGrafic);
   };
+
+  const modGrafic = (IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
+    DataThree,LablesFour,DataFour,LablesFive,DataFive,Id) => {
+    return database.updateTableGrafic(IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
+      DataThree,LablesFour,DataFour,LablesFive,DataFive,Id, refreshGrafic);
+  };
  
 
   const addNewGrafic = (IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
@@ -32,7 +38,7 @@ export const GraficContextProvider = (props) => {
     return database.insertGrafic(IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
       DataThree,LablesFour,DataFour,LablesFive,DataFive, refreshGrafic);
   };
-  const getGraficById = (id) => {
+  const getGraficById = async (id) => {
     return database.getGraficById(id, setGrafics);
   };
 
@@ -41,7 +47,8 @@ export const GraficContextProvider = (props) => {
     grafic,
     addNewGrafic,
     getGraficById,
-    grafics
+    grafics,
+    modGrafic
   };
 
   // Pasar los valores al proveedor y retornarlo

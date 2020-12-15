@@ -36,7 +36,7 @@ const graficModifyScreen = ({ route,navigation }) => {
     const [errorgrafic, setErrorGrafic] = useState(false);
     const typeContext = useContext(TypeContext);
     const graficContext = useContext(GraficContext);
-    const { grafic,getGraficById } = graficContext;
+    const { grafics,getGraficById } = graficContext;
 
     const{type} = typeContext;
      // Cargar la fuente de manera asíncrona
@@ -53,31 +53,31 @@ const graficModifyScreen = ({ route,navigation }) => {
   }, []);
   // Ejecutar el efecto cuando el valor de la nota cambie
   useEffect(() => {
-    const getGrafic = () => {getGraficById(id)}; getGrafic();
-     if (grafic.length) {
-         setIdTipo(grafic[0].grafic);
-         setName(grafic[0].grafic);
-         setLablesOne(grafic[0].grafic);
-         setDataOne(grafic[0].grafic);
-         setLableTwo(grafic[0].grafic);
-         setDataTwo(grafic[0].grafic);
-         setLableThree(grafic[0].grafic);
-         setDataThree(grafic[0].grafic);
-         setLableFour(grafic[0].grafic);
-         setDataFour(grafic[0].grafic);
-         setLableFive(grafic[0].grafic);
-         setDataFive(grafic[0].grafic);
+    const getGrafic =  () => { getGraficById(id)}; getGrafic();
+     if (grafics.length) {
+         setIdTipo(grafics[0].idTipo);
+         setName(grafics[0].name);
+         setLablesOne(grafics[0].lablesOne);
+         setDataOne(grafics[0].dataOne);
+         setLableTwo(grafics[0].lableTwo);
+         setDataTwo(grafics[0].dataTwo);
+         setLableThree(grafics[0].lableThree);
+         setDataThree(grafics[0].dataThree);
+         setLableFour(grafics[0].lableFour);
+         setDataFour(grafics[0].dataFour);
+         setLableFive(grafics[0].lableFive);
+         setDataFive(grafics[0].dataFive);
          console.log(idTipo,Name,LablesOne,DataOne,LableTwo,DataTwo,LablesThree,DataThree,LableFour,DataFour,LableFive,DataFive);
      };
-  }, [id,grafic] );
+  }, [id,grafics] );
 
-    
+
 
     const handlerSaveGrafic = async () => {
         if(idTipo,Name,LablesOne,LableTwo,LablesThree,LableFour,LableFive,DataOne,DataTwo,
-          DataThree,DataFour,DataFive){
-        await addNewGrafic(idTipo,Name,LablesOne,LableTwo,LablesThree,LableFour,LableFive,DataOne,DataTwo,
-          DataThree,DataFour,DataFive,refreshGrafic );
+          DataThree,DataFour,DataFive,id){
+        await modGrafic(idTipo,Name,LablesOne,LableTwo,LablesThree,LableFour,LableFive,DataOne,DataTwo,
+          DataThree,DataFour,DataFive,id, refreshGrafic );
           navigation.goBack();
         }
         else {
@@ -85,7 +85,6 @@ const graficModifyScreen = ({ route,navigation }) => {
           } 
         };
 
-    console.log(type);
     if (!fontsLoaded)
     return (
       <Content contentContainerStyle={styles.content}>
@@ -97,22 +96,22 @@ const graficModifyScreen = ({ route,navigation }) => {
             <View style={styles.cuerpo}>
             <View style={styles.marco}>
             <Text style={styles.textoCards}>
-                Add Name of the Grafic
+                Name of the Grafic
             </Text>
             <Input style={styles.tamano}
             value={Name}
             defaultValue={"Vacio"}
-            onChangeText={setName}
+            onChange={setName}
             placeholder="Write the name"/>
             </View>
             <View style={styles.marco}>
             <Text style={styles.textoCards}>
-             Add Type the Grafic
+             Type of Grafic
             </Text>
             <Picker
               selectedValue={idTipo}
               style={{marginTop:40, height: 50, width: 180 }}
-              onValueChange={(itemValue, itemIndex) => setIdTipo(itemValue)}
+              onChange={(itemValue, itemIndex) => setIdTipo(itemValue)}
               >
               <Picker.Item label={type[0].nameType} value= "1" />
               <Picker.Item label={type[1].nameType} value="2" />
@@ -127,26 +126,26 @@ const graficModifyScreen = ({ route,navigation }) => {
             <ScrollView>
                 <Text style={styles.textoCards}>Lable One</Text>
                 <Item style={errorgrafic ? styles.inputError : styles.itemStyle} >
-                <Input style={styles.tamanoDos } value={LablesOne} onChangeText={setLablesOne}placeholder="Write the lable one"/>
+                <Input style={styles.tamanoDos } value={LablesOne} onChange={setLablesOne}placeholder="Write the lable one"/>
                 </Item>
                 <Text style={styles.textoCards}>Data One</Text>
-                <Input style={styles.tamanoDos} value={DataOne} onChangeText={setDataOne}placeholder="Write the data one"/>
+                <Input style={styles.tamanoDos} value={DataOne} onChange={setDataOne}placeholder="Write the data one"/>
                 <Text style={styles.textoCards}>Lable Two</Text>
-                <Input style={styles.tamanoDos} value={LableTwo} onChangeText={setLableTwo}placeholder="Write the lable two"/>
+                <Input style={styles.tamanoDos} value={LableTwo} onChange={setLableTwo}placeholder="Write the lable two"/>
                 <Text style={styles.textoCards}>Data Two</Text>
-                <Input style={styles.tamanoDos} value={DataTwo} onChangeText={setDataTwo}placeholder="Write the data two"/>
+                <Input style={styles.tamanoDos} value={DataTwo} onChange={setDataTwo}placeholder="Write the data two"/>
                 <Text style={styles.textoCards}>Lable Three</Text>
-                <Input style={styles.tamanoDos} value={LablesThree} onChangeText={setLableThree}placeholder="Write the lable three"/>
+                <Input style={styles.tamanoDos} value={LablesThree} onChange={setLableThree}placeholder="Write the lable three"/>
                 <Text style={styles.textoCards}>Data Three</Text>
-                <Input style={styles.tamanoDos} value={DataThree} onChangeText={setDataThree}placeholder="Write the data three"/>
+                <Input style={styles.tamanoDos} value={DataThree} onChange={setDataThree}placeholder="Write the data three"/>
                 <Text style={styles.textoCards}>Lable Four</Text>
-                <Input style={styles.tamanoDos} value={LableFour} onChangeText={setLableFour}placeholder="Write the lable four"/>
+                <Input style={styles.tamanoDos} value={LableFour} onChange={setLableFour}placeholder="Write the lable four"/>
                 <Text style={styles.textoCards}>Data Four</Text>
-                <Input style={styles.tamanoDos} value={DataFour} onChangeText={setDataFour}placeholder="Write the data four"/>
+                <Input style={styles.tamanoDos} value={DataFour} onChange={setDataFour}placeholder="Write the data four"/>
                 <Text style={styles.textoCards}>Lable Five</Text>
-                <Input style={styles.tamanoDos} value={LableFive} onChangeText={setLableFive}placeholder="Write the lable five"/>
+                <Input style={styles.tamanoDos} value={LableFive} onChange={setLableFive}placeholder="Write the lable five"/>
                 <Text style={styles.textoCards}>Data Five</Text>
-                <Input style={styles.tamanoDos} value={DataFive} onChangeText={setDataFive}placeholder="Write the data five"/>
+                <Input style={styles.tamanoDos} value={DataFive} onChange={setDataFive}placeholder="Write the data five"/>
                 
                 </ScrollView>
             </View>
