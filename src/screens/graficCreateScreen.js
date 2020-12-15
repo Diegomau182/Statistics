@@ -55,11 +55,10 @@ const graficCreateScreen = ({ navigation }) => {
     else setEnableSave(true);
   }, [Name]);
 
-    const handlerNewGrafic = async () => {
-        if(idTipo,Name,LablesOne,LableTwo,LablesThree,LableFour,LableFive,DataOne,DataTwo,
-          DataThree,DataFour,DataFive){
+    const handlerNewGrafic = async() => {
+        if(idTipo){
         await addNewGrafic(idTipo,Name,LablesOne,LableTwo,LablesThree,LableFour,LableFive,DataOne,DataTwo,
-          DataThree,DataFour,DataFive,refreshGrafic );
+          DataThree,DataFour,DataFive,refreshGrafic);
           navigation.goBack();
         }
         else {
@@ -82,7 +81,6 @@ const graficCreateScreen = ({ navigation }) => {
             </Text>
             <Input style={styles.tamano}
             value={Name}
-            defaultValue={"Vacio"}
             onChangeText={setName}
             placeholder="Write the name"/>
             </View>
