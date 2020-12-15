@@ -26,20 +26,22 @@ export const GraficContextProvider = (props) => {
     return database.getGrafic(setGrafic);
   };
 
-  const modGrafic = (IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
+  const modGrafic = async (LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
     DataThree,LablesFour,DataFour,LablesFive,DataFive,Id) => {
-    return database.updateTableGrafic(IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
-      DataThree,LablesFour,DataFour,LablesFive,DataFive,Id, refreshGrafic);
+    await database.updateTableGrafic(LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
+      DataThree,LablesFour,DataFour,LablesFive,DataFive,Id,refreshGrafic); 
+      return refreshGrafic();
   };
  
 
-  const addNewGrafic = async(IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
+  const addNewGrafic = async (IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
     DataThree,LablesFour,DataFour,LablesFive,DataFive) => {
-     return database.insertGrafic(IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
-      DataThree,LablesFour,DataFour,LablesFive,DataFive, refreshGrafic);
+     await database.insertGrafic(IdTipo,Name,LablesOne,DataOne,LablesTwo,DataTwo,LablesThree,
+      DataThree,LablesFour,DataFour,LablesFive,DataFive,refreshGrafic); 
+      return refreshGrafic();
   };
   const getGraficById = async (id) => {
-    return database.getGraficById(id, setGrafics);
+    database.getGraficById(id, setGrafics);
   };
 
   // Crear el objeto de contexto
